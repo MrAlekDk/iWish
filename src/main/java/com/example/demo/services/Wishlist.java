@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class Wishlist {
     private ArrayList<Wish> wishArrayList;
     private Wish wish;
+    private String user;
 
     public Wishlist(ArrayList<Wish> wishArrayList){
         this.wishArrayList = wishArrayList;
