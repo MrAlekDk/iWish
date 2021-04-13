@@ -11,7 +11,7 @@ public class DatabaseRep {
 
     }
 
-    public ArrayList<Wish> getAllEmployees() {
+    public ArrayList<Wish> getWishlist() {
         ArrayList<Wish> wishlist = new ArrayList<Wish>();
         try {
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/employes_and_departments", "root", "Sb01-149e");

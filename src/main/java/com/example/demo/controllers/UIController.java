@@ -24,8 +24,8 @@ public class UIController {
         HttpSession session = request.getSession();
 
         if (true) {
-            return "redirect:/userpage";
             session.setAttribute("user-logged-in", "true");
+            return "redirect:/userpage";
         } else {
             session.setAttribute("user-logged-in", "false");
             return "redirect:/login";

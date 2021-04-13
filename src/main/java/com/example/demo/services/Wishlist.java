@@ -6,11 +6,14 @@ import java.util.ArrayList;
 
 public class Wishlist {
     private ArrayList<Wish> wishArrayList;
+    private DatabaseRep dbRep;
     private Wish wish;
     private String user;
 
-    public Wishlist(ArrayList<Wish> wishArrayList){
-        this.wishArrayList = wishArrayList;
+    public Wishlist(){
+        dbRep = new DatabaseRep();
+        this.wishArrayList = dbRep.getWishlist();
+
     }
 
     public void addWish(Wish wish){
