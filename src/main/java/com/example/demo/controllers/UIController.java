@@ -46,4 +46,9 @@ public class UIController {
             return "redirect:/login.html";
         }
     }
+
+    @GetMapping("/frontpage")
+    public String frontpage(){
+        return "frontpage.html";
+    }
 }

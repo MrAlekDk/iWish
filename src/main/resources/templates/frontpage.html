@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace = "fragments/head.html(currentPage = 'Frontpage', stylesheet='styles/frontpage.css')"></head>
+
+<header th:replace = "fragments/header.html(h1text = 'iWish!')"></header>
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+    <section class="container">
+        div
+        <img src="images/sc.png" alt="Shoppingcart" class="image">
+        <p>Velkommen til iWish, log ind og lav din egen ønskeliste eller kig på dine venners ønskelister</p>
+    </section>
 
+    <footer th:replace="fragments/footer.html"></footer>
 </body>
 </html>
