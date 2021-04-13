@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/head.html(currentpage='Create a wish')"></head>
+<body>
+<header th:replace="fragments/header.html(h1text='Create a wish')"></header>
+
+<section class="create-a-wish">
+    <form action="/addNewWish" method="post" class="submitField">
+        <label for="wishName">Name</label><br>
+        <input type="text" id="wishName" name="wishName" placeholder="Name of product"><br>
+
+        <label for="price">Price</label><br>
+        <input type="number" id="price" name="price" placeholder="Price of wish"><br>
+
+        <label for="description">Description</label><br>
+        <input type="number" id="description" name="description" placeholder="Description of wish"><br>
+
+        <button>Add new wish to your wish list</button>
+    </form>
+</section>
+<footer th:replace="fragments/footer.html"></footer>
+</body>
+</html>

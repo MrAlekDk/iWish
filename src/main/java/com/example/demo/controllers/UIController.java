@@ -20,23 +20,20 @@ public class UIController {
         return "login.html";
     }
 
-    @PostMapping(value = "checkLogin")
-    public String checkLogin(@RequestParam("username") String username, @RequestParam("password") String password,
-                             HttpServletRequest request) {
+    @PostMapping(value = "/checkLogin")
+    public String checkLogin(@RequestParam("username") String username, @RequestParam("password") String password, HttpServletRequest request) {
         session = request.getSession();
-        System.out.println(username + password);
-        boolean correctInformation = wishlist.checkInformation(username,password);
-        if (correctInformation==true) {
+
+        if (wishlist.checkInformation(username,password)) {
             session.setAttribute("user-logged-in", "true");
             return "redirect:/userpage";
         } else {
             session.setAttribute("user-logged-in", "false");
             return "redirect:/login";
         }
-
     }
 
-    @GetMapping(value = "userpage")
+    @GetMapping(value = "/userpage")
     public String renderUserpage(Model user) {
         if(session.getAttribute("user-logged-in").equals("true")){
             user.addAttribute("username",wishlist.getUsername());
