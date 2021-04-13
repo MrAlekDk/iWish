@@ -1,9 +1,9 @@
 package com.example.demo.models;
 
-public class Bruger {
+public class User {
     private String name;
 
-    public Bruger(String navn) {
+    public User(String navn) {
         this.name = name;
     }
 
