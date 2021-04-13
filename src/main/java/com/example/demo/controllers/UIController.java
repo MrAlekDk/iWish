@@ -23,7 +23,7 @@ public class UIController {
     @PostMapping(value = "checkLogin")
     public String checkLogin(@RequestParam() String username, String password) {
         HttpSession session = request.getSession();
-
+        boolean correctInformation = wishlist.checkInformation(username,password);
         if (true) {
             session.setAttribute("user-logged-in", "true");
             return "redirect:/userpage";

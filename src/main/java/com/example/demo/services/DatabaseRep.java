@@ -31,4 +31,9 @@ public class DatabaseRep {
         }
         return wishlist;
     }
+
+    public boolean checkInformation(String username,String password) {
+
+        return true;
+    }
 }
