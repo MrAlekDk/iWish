@@ -4,7 +4,7 @@ public class User {
     private String name;
 
     public User(String navn) {
-        this.name = name;
+        this.name = navn;
     }
 
     public void setName(String name) {
@@ -12,7 +12,7 @@ public class User {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 }
 

@@ -6,7 +6,19 @@
 </head>
 <body>
 <header th:replace="fragments/header.html(h1text='Welcome to iWish!')"></header>
-<section></section>
+
+<section class="login-form">
+    <form action="/checkLogin" method="post" class="submitField">
+        <label for="username">Username</label><br>
+        <input type="text" id="username" name="username" placeholder="Username here"><br>
+
+        <label for="password">Password</label><br>
+        <input type="text" id="password" name="password" placeholder="Password here"><br>
+
+        <button>Login to iWish</button>
+
+    </form>
+</section>
 <footer></footer>
 </body>
 </html>

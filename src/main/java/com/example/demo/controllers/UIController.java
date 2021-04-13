@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class UIController {
-    private HttpServletRequest request;
+    private HttpSession session;
     private Wishlist wishlist = new Wishlist();
 
     @GetMapping(value = "/login")
@@ -21,10 +21,12 @@ public class UIController {
     }
 
     @PostMapping(value = "checkLogin")
-    public String checkLogin(@RequestParam() String username, String password) {
-        HttpSession session = request.getSession();
+    public String checkLogin(@RequestParam("username") String username, @RequestParam("password") String password,
+                             HttpServletRequest request) {
+        session = request.getSession();
+        System.out.println(username + password);
         boolean correctInformation = wishlist.checkInformation(username,password);
-        if (true) {
+        if (correctInformation==true) {
             session.setAttribute("user-logged-in", "true");
             return "redirect:/userpage";
         } else {
@@ -36,7 +38,12 @@ public class UIController {
 
     @GetMapping(value = "userpage")
     public String renderUserpage(Model user) {
-        user.addAttribute("username",wishlist.getUsername());
-        return "userpage.html";
+        if(session.getAttribute("user-logged-in").equals("true")){
+            user.addAttribute("username",wishlist.getUsername());
+            return "userpage.html";
+        }
+        else{
+            return "redirect:/login.html";
+        }
     }
 }

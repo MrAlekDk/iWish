@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import com.example.demo.models.User;
 import com.example.demo.models.Wish;
 
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ public class Wishlist {
     private ArrayList<Wish> wishArrayList;
     private DatabaseRep dbRep;
     private Wish wish;
-    private String user;
+    private User user;
 
     public Wishlist() {
         dbRep = new DatabaseRep();
@@ -43,16 +44,17 @@ public class Wishlist {
     }
 
     public String getUsername() {
-        return this.user;
+        return user.getName();
     }
 
     public boolean checkInformation(String username, String password) {
-        if (dbRep.checkInformation(username, password) == true) {
-            this.user = username;
+        //if (dbRep.checkInformation(username, password) == true) {
+          this.user = new User(username);
+
             return true;
-        }
-        else{
-            return false;
-        }
+       // }
+       // else{
+          // return false;
+       // }
     }
 }
