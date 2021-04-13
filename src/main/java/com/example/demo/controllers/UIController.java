@@ -2,6 +2,7 @@ package com.example.demo.controllers;
 
 import com.example.demo.services.Wishlist;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,8 +35,8 @@ public class UIController {
     }
 
     @GetMapping(value = "userpage")
-    public String renderUserpage() {
-
+    public String renderUserpage(Model user) {
+        user.addAttribute("username",wishlist.getUsername());
         return "userpage.html";
     }
 }

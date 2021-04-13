@@ -41,4 +41,8 @@ public class Wishlist {
             }
         }
     }
+
+    public String getUsername() {
+        return this.user;
+    }
 }
