@@ -17,12 +17,17 @@ public class UIController {
 
     @GetMapping(value = "/login")
     public String renderLoginPage(){
+
         return "login.html";
     }
 
     @PostMapping(value = "/checkLogin")
     public String checkLogin(@RequestParam("username") String username, @RequestParam("password") String password, HttpServletRequest request) {
         session = request.getSession();
+
+        if(session.getAttribute("user-logged-in").equals("true")){
+            return "redirect:/userpage";
+        }
 
         if (wishlist.checkInformation(username,password)) {
             session.setAttribute("user-logged-in", "true");
@@ -32,6 +37,8 @@ public class UIController {
             return "redirect:/login";
         }
     }
+
+
 
     @GetMapping(value = "/userpage")
     public String renderUserpage(Model user) {
