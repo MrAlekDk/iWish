@@ -22,12 +22,12 @@ public class Wishlist {
     }
 
     public ArrayList<Wish> getWishlist(){
-
         return this.wishlist;
     }
 
-    public void addWish(Wish wish) {
-        wishlist.add(wish);
+    public void addWish(String name,int price, String description) {
+        Wish newWish = new Wish(name,price,description);
+        wishlist.add(newWish);
     }
 
     public void removeWish(int x) {

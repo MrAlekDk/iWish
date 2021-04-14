@@ -54,4 +54,11 @@ public class UIController {
         session.setAttribute("logged-in",false);
         return "redirect:/frontpage";
     }
+
+
+    @PostMapping(value="addNewWish")
+    public String addNewWish(@RequestParam("wishName") String wishName, @RequestParam("price") int price, @RequestParam("description")String desc){
+            wishlist.addWish(wishName,price,desc);
+        return "redirect:/userpage";
+    }
 }
