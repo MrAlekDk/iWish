@@ -9,7 +9,7 @@ h1{
 p{
     font-family: "Segoe UI";
 }
-.ul{
+.ul1{
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -86,4 +86,47 @@ footer{
     color: #529aac;
     bottom:0;
     position: fixed;
+}
+
+.wishlist{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap
+}
+.wish ul{
+    display: flex;
+    align-self: flex-start;
+    flex-wrap: wrap;
+
+}
+
+.wish li{
+    margin-top: 20px;
+    height: 400px;
+    width: 400px;
+    background-color: white;
+    border: solid 4px black;
+    border-radius: 8px;
+}
+
+.wish h2{
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    font-size: 25px;
+    font-family: "Segoe UI";
+}
+
+.wish p{
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    font-size: 15px;
+    font-family: "Segoe UI";
+}
+
+.wish div{
+    height: 5px;
+    width: 400px;
+    border-top: black;
 }

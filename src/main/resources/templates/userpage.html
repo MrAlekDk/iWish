@@ -6,10 +6,11 @@
 <footer th:replace="fragments/footer.html"></footer>
 
 <section class="wishlist">
-    <ul th:each="wish : ${wishlist}">
-        <li >
+    <ul th:each="wish : ${wishlist}" class="wish ul">
+        <li class="wish li">
             <h2 th:text="${wish.getName()}"></h2>
-            <p th:text="${wish.getPrice()}"></p>
+            <p>Price: <p th:text="${wish.getPrice()}"></p></p>
+
             <p th:text="${wish.getDescription()}"></p>
         </li>
     </ul>
