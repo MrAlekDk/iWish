@@ -4,5 +4,17 @@
 <body>
 <header th:replace="fragments/header.html(h1text=|Welcome ${username}|)"></header>
 <footer th:replace="fragments/footer.html"></footer>
+
+<section class="wishlist">
+    <ul th:each="wish : ${wishlist}">
+        <li >
+            <h2 th:text="${wish.getName()}"></h2>
+            <p th:text="${wish.getPrice()}"></p>
+            <p th:text="${wish.getDescription()}"></p>
+        </li>
+    </ul>
+</section>
+
+
 </body>
 </html>

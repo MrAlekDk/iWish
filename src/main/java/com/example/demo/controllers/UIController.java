@@ -37,6 +37,7 @@ public class UIController {
     public String renderUserpage(Model user) {
         if(session.getAttribute("user-logged-in").equals("true")){
             user.addAttribute("username",wishlist.getUsername());
+            user.addAttribute("wishlist",wishlist.getWishlist());
             return "userpage.html";
         }
         else{
