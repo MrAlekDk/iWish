@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<h1 th:text="${h1text}"></h1>
 <nav class="nav-bar">
-    <ul>
-        <li><a th:href="@{/frontpage}">Home</a></li>
-        <li><a th:href="@{/login}">WishList</a></li>
-        <li><a th:href="@{/createWish}">Create a wish</a></li>
-        <li><a th:href="@{/login}">Login</a></li>
-        <li><a th:href="@{/logging-out}">Log out from iWish</a></li>
+    <ul class="ul">
+        <li class="li"><a th:href="@{/frontpage}">Home</a></li>
+        <li class="li"><a th:href="@{/login}">WishList</a></li>
+        <li class="li"><a th:href="@{/createWish}">Create a wish</a></li>
+        <li class="li"><a th:href="@{/login}">Login</a></li>
+        <li class="li"><a th:href="@{/logging-out}">Log out from iWish</a></li>
 
     </ul>
 </nav>
+<h1 th:text="${h1text}"></h1>
 </html>

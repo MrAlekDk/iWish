@@ -9,7 +9,28 @@ h1{
 p{
     font-family: "Segoe UI";
 }
-
+.ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: hotpink;
+}
+.li {
+    float: left;
+    border-right: 1px lightcyan;
+}
+li a{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 24px 26px;
+    text-decoration: none;
+}
+li a:hover{
+    background-color: lightpink;
+}
+/*
 .nav-bar{
     align-self: flex-end;
     display: flex;
@@ -50,6 +71,8 @@ ul{
     background-color: #a7a7a7;
 }
 
+
+ */
 footer{
     margin-top: 30px;
     width:100%;
