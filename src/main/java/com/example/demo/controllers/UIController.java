@@ -24,6 +24,7 @@ public class UIController {
     @PostMapping(value = "/checkLogin")
     public String checkLogin(@RequestParam("username") String username, @RequestParam("password") String password, HttpServletRequest request) {
         session = request.getSession();
+        session.setAttribute("user-logged-in","false");
 
         if(session.getAttribute("user-logged-in").equals("true")){
             return "redirect:/userpage";
@@ -37,8 +38,6 @@ public class UIController {
             return "redirect:/login";
         }
     }
-
-
 
     @GetMapping(value = "/userpage")
     public String renderUserpage(Model user) {
