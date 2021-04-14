@@ -20,4 +20,9 @@ public class IWishController {
         return "redirect:/userpage";
     }
 
+    @GetMapping("/frontpage")
+    public String frontpage() {
+        return "frontpage.html";
+    }
+
 }

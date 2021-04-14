@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -19,6 +20,12 @@ public class UIController {
     @GetMapping(value = "/login")
     public String renderLoginPage(HttpServletRequest request) {
         session = request.getSession();
+        if(session.getAttribute("logged-in")==null){
+            session.setAttribute("logged-in",false);
+        }
+        if ((boolean)session.getAttribute("logged-in")) {
+            return "redirect:/userpage";
+        }
         return "login.html";
     }
 
@@ -36,16 +43,17 @@ public class UIController {
     public String renderUserpage(Model user,HttpServletRequest request) {
         boolean loggedIn = (boolean) session.getAttribute("logged-in");
         if (!loggedIn) {
+            System.out.println("Not logged in");
             return "redirect:/login";
         }
-
-        user.addAttribute("username", wishlist.getUsername());
-        user.addAttribute("wishlist", wishlist.getWishlist());
+            user.addAttribute("username", wishlist.getUsername());
+            user.addAttribute("wishlist", wishlist.getWishlist());
         return "userpage.html";
     }
 
-    @GetMapping("/frontpage")
-    public String frontpage() {
-        return "frontpage.html";
+    @GetMapping("/logging-out")
+    public String logout(){
+        session.setAttribute("logged-in",false);
+        return "redirect:/frontpage";
     }
 }
