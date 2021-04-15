@@ -15,7 +15,7 @@ public class Wish {
     }
     public Wish(){};
 
-    /*----------------------- Geters -----------------------*/
+    /*----------------------- Getters -----------------------*/
 
     public String getName() {
         return name;
@@ -33,7 +33,7 @@ public class Wish {
         return reserved;
     }
 
-    /*----------------------- Seters -----------------------*/
+    /*----------------------- Setters -----------------------*/
 
     public void setName(String name) {
         this.name = name;

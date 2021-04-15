@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class IWishController {
 
-
     @GetMapping(value = "/createWish")
     public String renderWishCreatorPage(){
 
