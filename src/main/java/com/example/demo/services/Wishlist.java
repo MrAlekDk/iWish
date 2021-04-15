@@ -13,15 +13,11 @@ public class Wishlist {
 
     public Wishlist() {
         dbRep = new DatabaseRep();
-        this.wishlist = dbRep.getWishlist();
 
-        Wish tmp = new Wish("Cykel",250,"En flot cykel med to hjul");
-        Wish tmp2 = new Wish("Bil",250000,"En nice bil med 4 hjul");
-        wishlist.add(tmp);
-        wishlist.add(tmp2);
     }
 
     public ArrayList<Wish> getWishlist(){
+        this.wishlist = dbRep.getWishlist();
         return this.wishlist;
     }
 

@@ -25,9 +25,7 @@ public class UIController {
         else if ((boolean)session.getAttribute("logged-in")) {
             return "redirect:/userpage";
         }
-
             return "login.html";
-
     }
 
     @PostMapping(value = "/check-login")
@@ -42,7 +40,6 @@ public class UIController {
 
     @GetMapping(value = "/userpage")
     public String renderUserpage(Model user,HttpServletRequest request) {
-
             user.addAttribute("username", wishlist.getUsername());
             user.addAttribute("wishlist", wishlist.getWishlist());
 
