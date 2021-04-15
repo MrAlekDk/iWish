@@ -20,5 +20,9 @@ public class User {
     public String getName() {
         return this.name;
     }
+
+    public int getWishlistID() {
+        return this.wishListID;
+    }
 }
 

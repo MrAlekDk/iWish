@@ -16,13 +16,13 @@ public class Wishlist {
 
     }
 
-    public ArrayList<Wish> getWishlist(){
-        this.wishlist = dbRep.getWishlist();
+    public ArrayList<Wish> getWishlist() {
+        this.wishlist = dbRep.getWishlist(user.getWishlistID());
         return this.wishlist;
     }
 
-    public void addWish(String name,int price, String description) {
-        Wish newWish = new Wish(name,price,description);
+    public void addWish(String name, int price, String description) {
+        Wish newWish = new Wish(name, price, description);
         wishlist.add(newWish);
     }
 
@@ -53,13 +53,11 @@ public class Wishlist {
     }
 
     public boolean checkInformation(String username, String password) {
-        //if (dbRep.checkInformation(username, password) == true) {
-          this.user = new User(username);
+            this.user = dbRep.checkUser(username, password);
+            if(user!=null){
+                return true;
+            }
 
-            return true;
-       // }
-       // else{
-          // return false;
-       // }
+            return false;
     }
 }

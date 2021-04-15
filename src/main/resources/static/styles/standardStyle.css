@@ -91,7 +91,8 @@ footer{
 .wishlist{
     display: flex;
     justify-content: space-around;
-    flex-wrap: wrap
+    flex-wrap: wrap;
+    list-style-type: none;
 }
 .wish ul{
     display: flex;
@@ -109,6 +110,7 @@ footer{
     background-color: white;
     border: solid 4px black;
     border-radius: 8px;
+    list-style-type: none;
 }
 
 .wish h2{
@@ -141,4 +143,7 @@ ul li::marker {
 
 body{
     background-color: lightcyan;
+}
+ul{
+    list-style-type: none;
 }

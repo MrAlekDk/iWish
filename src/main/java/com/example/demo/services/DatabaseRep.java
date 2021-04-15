@@ -14,12 +14,13 @@ public class DatabaseRep {
 
     }
 
-    public ArrayList<Wish> getWishlist() {
+    public ArrayList<Wish> getWishlist(int wishlistID) {
         ArrayList<Wish> wishlist = new ArrayList<Wish>();
 
         try {
             Connection conn = DriverManager.getConnection("jdbc:mysql://3.139.62.205:3306/iWish", "iWish", "1234");
-            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM wishList");
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM wishList WHERE wishlist_ID=?");
+            stmt.setInt(1,wishlistID);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Wish tmp = new Wish(

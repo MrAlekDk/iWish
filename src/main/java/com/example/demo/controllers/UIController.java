@@ -17,21 +17,20 @@ public class UIController {
     private HttpSession session;
 
     @GetMapping(value = "/login")
-    public String renderLoginPage(HttpServletRequest request) {
+    public String renderLoginPage( HttpServletRequest request) {
         session = request.getSession();
-        if(session.getAttribute("logged-in")==null){
-            session.setAttribute("logged-in",false);
-        }
-        else if ((boolean)session.getAttribute("logged-in")) {
+        if (!session.isNew()&&session.getAttribute("username")!=null) {
             return "redirect:/userpage";
         }
             return "login.html";
     }
 
     @PostMapping(value = "/check-login")
-    public String checkLogin(@RequestParam("username") String username, @RequestParam("password") String password) {
+    public String checkLogin(@RequestParam("username") String username, @RequestParam("password") String password, HttpServletRequest request) {
+
         if (wishlist.checkInformation(username, password)) {
-            session.setAttribute("logged-in",true);
+            session = request.getSession();
+            session.setAttribute("username",username);
             return "redirect:/userpage";
         } else {
             return "redirect:/login";
@@ -40,6 +39,9 @@ public class UIController {
 
     @GetMapping(value = "/userpage")
     public String renderUserpage(Model user,HttpServletRequest request) {
+        if(session.isNew()){
+            return"redirect:/login";
+        }
             user.addAttribute("username", wishlist.getUsername());
             user.addAttribute("wishlist", wishlist.getWishlist());
 
@@ -48,10 +50,13 @@ public class UIController {
 
     @GetMapping("/logging-out")
     public String logout(){
-        session.setAttribute("logged-in",false);
+        if(session==null){
+            return "redirect:/frontpage";
+        }
+        System.out.println("invalidating");
+        session.invalidate();
         return "redirect:/frontpage";
     }
-
 
     @PostMapping(value="addNewWish")
     public String addNewWish(@RequestParam("wishName") String wishName, @RequestParam("price") int price, @RequestParam("description")String desc){
