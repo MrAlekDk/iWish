@@ -8,9 +8,9 @@
 <section class="wishlist">
     <ul th:each="wish : ${wishlist}" class="wish">
         <li data-icon="">
-            <h2 th:text="${wish.getName()}"></h2>
+            <h2 th:text="|🎁 ${wish.getName()} 🎁|"></h2>
             <div></div>
-            <p>Price: <p th:text="${wish.getPrice()}"></p></p>
+            <p th:text="|Price: ${wish.getPrice()}|"></p>
             <div></div>
             <p th:text="${wish.getDescription()}"></p>
         </li>
