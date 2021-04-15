@@ -19,7 +19,13 @@ public class UIController {
     @GetMapping(value = "/login")
     public String renderLoginPage(HttpServletRequest request) {
         session = request.getSession();
-        return "login.html";
+        if(session.getAttribute("logged-in")==null){
+            session.setAttribute("logged-in",false);
+        }
+        else if ((boolean)session.getAttribute("logged-in")) {
+            return "redirect:/userpage";
+        }
+            return "login.html";
     }
 
     @PostMapping(value = "/check-login")
@@ -34,18 +40,22 @@ public class UIController {
 
     @GetMapping(value = "/userpage")
     public String renderUserpage(Model user,HttpServletRequest request) {
-        boolean loggedIn = (boolean) session.getAttribute("logged-in");
-        if (!loggedIn) {
-            return "redirect:/login";
-        }
+            user.addAttribute("username", wishlist.getUsername());
+            user.addAttribute("wishlist", wishlist.getWishlist());
 
-        user.addAttribute("username", wishlist.getUsername());
-        user.addAttribute("wishlist", wishlist.getWishlist());
         return "userpage.html";
     }
 
-    @GetMapping("/frontpage")
-    public String frontpage() {
-        return "frontpage.html";
+    @GetMapping("/logging-out")
+    public String logout(){
+        session.setAttribute("logged-in",false);
+        return "redirect:/frontpage";
+    }
+
+
+    @PostMapping(value="addNewWish")
+    public String addNewWish(@RequestParam("wishName") String wishName, @RequestParam("price") int price, @RequestParam("description")String desc){
+            wishlist.addWish(wishName,price,desc);
+        return "redirect:/userpage";
     }
 }

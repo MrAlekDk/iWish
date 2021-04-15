@@ -9,7 +9,70 @@ h1{
 p{
     font-family: "Segoe UI";
 }
+.ul1{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: hotpink;
+}
+.li {
+    float: left;
+    border-right: 1px lightcyan;
+}
+li a{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 24px 26px;
+    text-decoration: none;
+}
+li a:hover{
+    background-color: lightpink;
+}
+/*
+.nav-bar{
+    align-self: flex-end;
+    display: flex;
+    top: 10px;
+    position: fixed;
+}
 
+a{
+    font-family: Tahoma;
+    color: white;
+    text-decoration-line: none;
+    margin-right: 15px;
+    margin-left:15px;
+}
+
+
+ul{
+    display: flex;
+    justify-content: space-around;
+}
+
+.nav-bar li{
+    display: flex;
+    justify-content: flex-end;
+    background-color: #000000;
+    opacity: 85%;
+    list-style-type: none;
+    border-radius: 5px;
+    border: solid 2px #ececec;
+    margin-right: 30px;
+    height: 100%;
+}
+
+.nav-bar li:hover{
+    font-size: 25px;
+    opacity: 100%;
+    transition: all 700ms ease;
+    background-color: #a7a7a7;
+}
+
+
+ */
 footer{
     margin-top: 30px;
     width:100%;
@@ -23,4 +86,59 @@ footer{
     color: #529aac;
     bottom:0;
     position: fixed;
+}
+
+.wishlist{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap
+}
+.wish ul{
+    display: flex;
+    align-self: flex-start;
+    flex-wrap: wrap;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.wish li{
+    margin-top: 20px;
+    height: 400px;
+    width: 400px;
+    background-color: white;
+    border: solid 4px black;
+    border-radius: 8px;
+}
+
+.wish h2{
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    font-size: 25px;
+    font-family: "Segoe UI";
+    margin-bottom: 167px;
+}
+
+.wish p{
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    font-size: 15px;
+    font-family: "Segoe UI";
+}
+
+.wish div{
+    height: 5px;
+    width: 400px;
+    border-top: solid 4px black;
+}
+
+ul li::marker {
+    content: attr(data-icon);
+    font-size: 1.25em;
+}
+
+body{
+    background-color: lightcyan;
 }

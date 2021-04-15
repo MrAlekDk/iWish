@@ -9,14 +9,13 @@ public class IWishController {
 
     @GetMapping(value = "/createWish")
     public String renderWishCreatorPage(){
-
         return "wishcreator.html";
     }
 
-    @PostMapping(value="addNewWish")
-    public String addNewWish(){
 
-        return "redirect:/userpage";
+    @GetMapping("/frontpage")
+    public String frontpage() {
+        return "frontpage.html";
     }
 
 }

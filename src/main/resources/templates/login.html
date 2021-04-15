@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:replace="fragments/head.html(currentpage='Login')"></head>
+<head th:replace="fragments/head.html(currentPage='Login')"></head>
 <body>
 <header th:replace="fragments/header.html(h1text='Welcome to iWish!')"></header>
 
@@ -8,7 +8,6 @@
     <form action="/check-login" method="post" class="submitField">
         <label for="username">Username</label><br>
         <input type="text" id="username" name="username" placeholder="Username here"><br>
-
         <label for="password">Password</label><br>
         <input type="text" id="password" name="password" placeholder="Password here"><br>
 
