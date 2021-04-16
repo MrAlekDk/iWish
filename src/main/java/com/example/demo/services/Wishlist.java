@@ -23,6 +23,7 @@ public class Wishlist {
     public void addWish(String name, int price, String description) {
         Wish newWish = new Wish(name, price, description);
         wishlist.add(newWish);
+        dbRep.createWish(newWish,user.getWishlistID());
     }
 
     public void removeWish(int x) {
@@ -61,6 +62,6 @@ public class Wishlist {
     }
 
     public boolean createNewUser(String username,String password){
-        return metodeDerOpretterBruger();
+        return dbRep.createUser(username,password);
     }
 }

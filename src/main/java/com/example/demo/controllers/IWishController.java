@@ -15,7 +15,7 @@ public class IWishController {
     public String renderWishCreatorPage(HttpServletRequest request){
         HttpSession session = request.getSession();
         if(session.getAttribute("username") ==null){
-            return "redirect:/frontpage";
+            return "redirect:/login";
         }
         return "wishcreator.html";
     }

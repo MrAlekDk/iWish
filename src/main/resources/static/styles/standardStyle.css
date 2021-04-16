@@ -30,49 +30,7 @@ li a{
 li a:hover{
     background-color: lightpink;
 }
-/*
-.nav-bar{
-    align-self: flex-end;
-    display: flex;
-    top: 10px;
-    position: fixed;
-}
 
-a{
-    font-family: Tahoma;
-    color: white;
-    text-decoration-line: none;
-    margin-right: 15px;
-    margin-left:15px;
-}
-
-
-ul{
-    display: flex;
-    justify-content: space-around;
-}
-
-.nav-bar li{
-    display: flex;
-    justify-content: flex-end;
-    background-color: #000000;
-    opacity: 85%;
-    list-style-type: none;
-    border-radius: 5px;
-    border: solid 2px #ececec;
-    margin-right: 30px;
-    height: 100%;
-}
-
-.nav-bar li:hover{
-    font-size: 25px;
-    opacity: 100%;
-    transition: all 700ms ease;
-    background-color: #a7a7a7;
-}
-
-
- */
 footer{
     margin-top: 30px;
     width:100%;
@@ -147,3 +105,4 @@ body{
 ul{
     list-style-type: none;
 }
+

@@ -50,4 +50,8 @@ public class Wish {
     public void setReserved(boolean reserved) {
         this.reserved = reserved;
     }
+
+    public boolean getReserved(){
+        return this.reserved;
+    }
 }

@@ -66,9 +66,13 @@ public class UIController {
 
     @PostMapping(value="upload-user")
     public String uploadUser(@RequestParam("username") String username, @RequestParam("password") String password){
+        boolean userCreated=wishlist.createNewUser(username,password);
+        if(userCreated==true){
+            return "redirect:/login";
+        }
+        else{
+            return "redirect:/create-user";
+        }
 
-        wishlist.createNewUser(username,password);
-
-        return "redirect:/frontpage";
     }
 }
