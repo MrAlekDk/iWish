@@ -8,9 +8,7 @@ import java.util.ArrayList;
 public class DatabaseRep {
 
     public DatabaseRep() {
-
     }
-
     public ArrayList<Wish> getWishlist(int wishlistID) {
         ArrayList<Wish> wishlist = new ArrayList<Wish>();
 
@@ -47,7 +45,6 @@ public class DatabaseRep {
                         User user = new User(
                                 rs.getString(2),
                                 rs.getInt(3));
-                        System.out.println(rs.getString(1));
                         return user;
                     }
                 }
@@ -61,11 +58,8 @@ public class DatabaseRep {
     }
 
     public void createWish(Wish newWish,int wishlist_ID) {
-
         try {
-            boolean res = false;
             Connection conn = DriverManager.getConnection("jdbc:mysql://3.139.62.205:3306/iWish", "iWish", "1234");
-
             PreparedStatement pstmt = conn.prepareStatement("INSERT INTO Wishlist (Wishlist_ID,Product_name,Price,Narrative,Reserved) VALUES (?,?,?,?,?)");
 
             pstmt.setInt(1, wishlist_ID);
@@ -83,7 +77,6 @@ public class DatabaseRep {
     public void updateProductName(String newProductName, String productName, int wishlist_ID) {
         try {
             Connection conn = DriverManager.getConnection("jdbc:mysql://3.139.62.205:3306/iWish", "iWish", "1234");
-
             PreparedStatement pstmt = conn.prepareStatement("UPDATE Wishlist SET Product_name = ? WHERE Wishlist_ID =" + wishlist_ID + " AND Product_name ='" + productName + "'");
             pstmt.setString(1, newProductName);
             pstmt.executeUpdate();
@@ -118,10 +111,6 @@ public class DatabaseRep {
                 if (rs1.getString(1) == username) {
                     return false;
                 } else if (rs1.getString(1) != username) {
-
-
-
-
                     PreparedStatement stmt3 = conn.prepareStatement("INSERT INTO Member (name,password) VALUES (?,?)");
                     stmt3.setString(1, username);
                     stmt3.setString(2, password);
