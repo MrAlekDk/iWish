@@ -4,13 +4,13 @@ public class User {
     private String name;
     private int wishListID;
 
-    public User(String navn, int wishListID) {
-        this.name = navn;
+    public User(String name, int wishListID) {
+        this.name = name;
         this.wishListID = wishListID;
     }
 
-    public User(String navn) {
-        this.name = navn;
+    public User(String name) {
+        this.name = name;
     }
 
     public void setName(String name) {

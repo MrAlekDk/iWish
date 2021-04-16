@@ -58,13 +58,13 @@ public class DatabaseRep {
         return null;
     }
 
-    public void createWish(String productname, int price, String description ,int wishlist_ID) {
+    public void createWish(String productName, int price, String description, int wishlist_ID) {
         try {
             Connection conn = DriverManager.getConnection("jdbc:mysql://3.139.62.205:3306/iWish", "iWish", "1234");
             PreparedStatement pstmt = conn.prepareStatement("INSERT INTO Wishlist (Wishlist_ID,Product_name,Price,Narrative,Reserved) VALUES (?,?,?,?,?)");
 
             pstmt.setInt(1, wishlist_ID);
-            pstmt.setString(2, productname);
+            pstmt.setString(2, productName);
             pstmt.setInt(3, price);
             pstmt.setString(4, description);
             pstmt.setBoolean(5, false);
@@ -75,19 +75,30 @@ public class DatabaseRep {
         }
     }
 
-    public void updateProductName(String newProductName, String productName, int wishlist_ID) {
+    public void updateWish(int wishID, String newProductName, int newPrice, String newNarrative) {
         try {
             Connection conn = DriverManager.getConnection("jdbc:mysql://3.139.62.205:3306/iWish", "iWish", "1234");
-            PreparedStatement pstmt = conn.prepareStatement("UPDATE Wishlist SET Product_name = ? WHERE Wishlist_ID =" + wishlist_ID + " AND Product_name ='" + productName + "'");
-            pstmt.setString(1, newProductName);
-            pstmt.executeUpdate();
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM Wishlist");
+            ResultSet st = pstmt.executeQuery();
+
+            while(st.next()){
+                if(st.getInt("ID") == wishID){
+                    PreparedStatement pstmt1 = conn.prepareStatement("UPDATE Wishlist SET Product_name = ?, Price = ?, Narrative = ? WHERE ID =" + wishID);
+                    pstmt1.setString(1, newProductName);
+                    pstmt1.setInt(2, newPrice);
+                    pstmt1.setString(3, newNarrative);
+                    pstmt1.executeUpdate();
+
+            }
+
+            }
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public void deleteWish(String productName, int wishlist_ID) { //Men hvordan får vi fat i wishlist id uden at skrive det i parameter??
+    public void deleteWish(String productName, int wishlist_ID) {
 
         try {
             Connection conn = DriverManager.getConnection("jdbc:mysql://3.139.62.205:3306/iWish", "iWish", "1234");
@@ -112,7 +123,7 @@ public class DatabaseRep {
                 if (rs1.getString(1) == username) {
                     return false;
                 } else if (rs1.getString(1) != username) {
-                    PreparedStatement stmt3 = conn.prepareStatement("INSERT INTO Member (name,password) VALUES (?,?)");
+                    PreparedStatement stmt3 = conn.prepareStatement("INSERT INTO Member (Name,Password) VALUES (?,?)");
                     stmt3.setString(1, username);
                     stmt3.setString(2, password);
                     stmt3.executeUpdate();
@@ -131,7 +142,7 @@ public class DatabaseRep {
 
         DatabaseRep test = new DatabaseRep();
 
-        test.updateProductName("glas", "hals", 2);
+        test.updateWish(4, "Lækkerier", 256, "Det her er super");
 
     }
 }
