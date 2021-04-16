@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace = "fragments/head.html(currentPage = 'Create User', stylesheet='styles/createUser.css')"></head>
+<body>
+<header th:replace = "fragments/header.html(h1text = 'Create new user')"></header>
+
+<section class="create-a-new-user">
+    <form action="/upload-user" method="post" class="submitField">
+        <label for="username">Username</label><br>
+        <input type="text" id="username" name="username" placeholder="Your username here"><br>
+
+        <label for="password">Password</label><br>
+        <input type="text" id="password" name="password" placeholder="Password"><br>
+
+        <button>Create new user</button>
+    </form>
+</section>
+
+</body>
+</html>

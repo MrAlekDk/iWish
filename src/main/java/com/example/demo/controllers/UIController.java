@@ -63,4 +63,12 @@ public class UIController {
             wishlist.addWish(wishName,price,desc);
         return "redirect:/userpage";
     }
+
+    @PostMapping(value="upload-user")
+    public String uploadUser(@RequestParam("username") String username, @RequestParam("password") String password){
+
+        wishlist.createNewUser(username,password);
+
+        return "redirect:/frontpage";
+    }
 }

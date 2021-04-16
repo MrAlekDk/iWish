@@ -8,7 +8,6 @@ import java.util.ArrayList;
 public class Wishlist {
     private ArrayList<Wish> wishlist;
     private DatabaseRep dbRep;
-    private Wish wish;
     private User user;
 
     public Wishlist() {
@@ -59,5 +58,9 @@ public class Wishlist {
             }
 
             return false;
+    }
+
+    public boolean createNewUser(String username,String password){
+        return metodeDerOpretterBruger();
     }
 }
