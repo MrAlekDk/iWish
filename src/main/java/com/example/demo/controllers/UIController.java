@@ -65,14 +65,23 @@ public class UIController {
     }
 
     @PostMapping(value="upload-user")
-    public String uploadUser(@RequestParam("username") String username, @RequestParam("password") String password){
-        boolean userCreated=wishlist.createNewUser(username,password);
-        if(userCreated==true){
+    public String uploadUser(@RequestParam("username") String username, @RequestParam("password") String password) {
+        boolean userCreated = wishlist.createNewUser(username, password);
+        if (userCreated == true) {
             return "redirect:/login";
-        }
-        else{
+        } else {
             return "redirect:/create-user";
         }
 
     }
+
+
+        @PostMapping(value="/delete-wish")
+        public String deleteWish(@RequestParam("wish-id") int wishID){
+        wishlist.removeWish(wishID);
+            System.out.println(wishID);
+            return "redirect:/userpage";
+        }
+
+
 }

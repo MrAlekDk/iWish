@@ -25,7 +25,7 @@ public class Wishlist {
     }
 
     public void removeWish(int x) {
-        wishlist.remove(x--);
+       this.dbRep.deleteWish(x,this.user.getWishlistID());
     }
 
     public void editWish(int x, String name, int price, String description) {
@@ -55,7 +55,6 @@ public class Wishlist {
             if(user!=null){
                 return true;
             }
-
             return false;
     }
 

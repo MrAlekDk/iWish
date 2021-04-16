@@ -45,7 +45,7 @@ public class DatabaseRep {
                     if (rs.getString(3).equals(password)) {
                         User user = new User(
                                 rs.getString(2),
-                                rs.getInt(3));
+                                rs.getInt(1));
                         return user;
                     }
                 }
@@ -98,13 +98,13 @@ public class DatabaseRep {
         }
     }
 
-    public void deleteWish(String productName, int wishlist_ID) {
+    public void deleteWish(int productID, int wishlist_ID) {
 
         try {
             Connection conn = DriverManager.getConnection("jdbc:mysql://3.139.62.205:3306/iWish", "iWish", "1234");
-            PreparedStatement pstm = conn.prepareStatement("DELETE FROM Wishlist WHERE Product_name = ? AND Wishlist_ID = ?");
+            PreparedStatement pstm = conn.prepareStatement("DELETE FROM Wishlist WHERE ID = ? AND Wishlist_ID = ?");
 
-            pstm.setString(1, productName);
+            pstm.setInt(1, productID);
             pstm.setInt(2, wishlist_ID);
             pstm.executeUpdate();
 
