@@ -14,7 +14,10 @@
             <div></div>
             <p th:text="${wish.getDescription()}"></p>
         </li>
-        <Button>Delete Wish</Button>
+        <form th:action="@{delete}" method="post">
+            <input type="hidden" name="id" th:value="${wish.getWishID()}" />
+            <input type="submit" value="Delete" class="btn btn-danger" />
+        </form>
     </ul>
 </section>
 

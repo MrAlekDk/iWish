@@ -19,6 +19,7 @@ public class DatabaseRep {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Wish tmp = new Wish(
+                        rs.getInt("ID"),
                         rs.getString("Product_name"),
                         rs.getInt("Price"),
                         rs.getString("Narrative")
@@ -57,16 +58,16 @@ public class DatabaseRep {
         return null;
     }
 
-    public void createWish(Wish newWish,int wishlist_ID) {
+    public void createWish(String productname, int price, String description ,int wishlist_ID) {
         try {
             Connection conn = DriverManager.getConnection("jdbc:mysql://3.139.62.205:3306/iWish", "iWish", "1234");
             PreparedStatement pstmt = conn.prepareStatement("INSERT INTO Wishlist (Wishlist_ID,Product_name,Price,Narrative,Reserved) VALUES (?,?,?,?,?)");
 
             pstmt.setInt(1, wishlist_ID);
-            pstmt.setString(2, newWish.getName());
-            pstmt.setInt(3, newWish.getPrice());
-            pstmt.setString(4, newWish.getDescription());
-            pstmt.setBoolean(5, newWish.getReserved());
+            pstmt.setString(2, productname);
+            pstmt.setInt(3, price);
+            pstmt.setString(4, description);
+            pstmt.setBoolean(5, false);
             pstmt.executeUpdate();
 
         } catch (SQLException e) {

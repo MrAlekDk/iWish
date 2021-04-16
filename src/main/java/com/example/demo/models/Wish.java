@@ -2,12 +2,14 @@ package com.example.demo.models;
 
 public class Wish {
 
+    private int wishID;
     private String name;
     private int price;
     private String description;
     private boolean reserved;
 
-    public Wish(String name, int price, String description){
+    public Wish(int wishID, String name, int price, String description){
+        this.wishID=wishID;
         this.name = name;
         this.price = price;
         this.description = description;
@@ -33,6 +35,14 @@ public class Wish {
         return reserved;
     }
 
+    public boolean getReserved(){
+        return this.reserved;
+    }
+
+    public int getWishID(){
+        return this.wishID;
+    }
+
     /*----------------------- Setters -----------------------*/
 
     public void setName(String name) {
@@ -51,7 +61,5 @@ public class Wish {
         this.reserved = reserved;
     }
 
-    public boolean getReserved(){
-        return this.reserved;
-    }
+
 }

@@ -20,9 +20,8 @@ public class Wishlist {
     }
 
     public void addWish(String name, int price, String description) {
-        Wish newWish = new Wish(name, price, description);
-        wishlist.add(newWish);
-        dbRep.createWish(newWish,user.getWishlistID());
+
+        dbRep.createWish(name,price,description,user.getWishlistID());
     }
 
     public void removeWish(int x) {
