@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/head.html(currentPage='Shared wishlists')"></head>
+<body>
+<header th:replace="fragments/header.html(h1text='Wishlists shared with you')"></header>
+
+<section class="shared-wishlist">
+    <ul th:each="list : ${wishlists}" class="wish">
+        <li data-icon="">
+            <p th:text="${list}"></p>
+        </li>
+        <form th:action="@{/selected-wishlist}" method="Get">
+            <input type="hidden" name="selected-wishlist" th:value="${list}" />
+            <input type="submit" value="Select" class="btn btn-danger" />
+        </form>
+    </ul>
+</section>
+
+</body>
+</html>

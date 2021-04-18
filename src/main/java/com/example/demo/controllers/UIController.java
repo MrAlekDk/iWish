@@ -17,12 +17,12 @@ public class UIController {
     private HttpSession session;
 
     @GetMapping(value = "/login")
-    public String renderLoginPage( HttpServletRequest request) {
+    public String renderLoginPage(HttpServletRequest request) {
         session = request.getSession();
-        if (!session.isNew()&&session.getAttribute("username")!=null) {
+        if (!session.isNew() && session.getAttribute("username") != null) {
             return "redirect:/userpage";
         }
-            return "login.html";
+        return "login.html";
     }
 
     @PostMapping(value = "/check-login")
@@ -30,7 +30,7 @@ public class UIController {
 
         if (wishlist.checkInformation(username, password)) {
             session = request.getSession();
-            session.setAttribute("username",username);
+            session.setAttribute("username", username);
             return "redirect:/userpage";
         } else {
             return "redirect:/login";
@@ -38,19 +38,19 @@ public class UIController {
     }
 
     @GetMapping(value = "/userpage")
-    public String renderUserpage(Model user,HttpServletRequest request) {
-        if(session.isNew()){
-            return"redirect:/login";
+    public String renderUserpage(Model user, HttpServletRequest request) {
+        if (session.isNew()) {
+            return "redirect:/login";
         }
-            user.addAttribute("username", wishlist.getUsername());
-            user.addAttribute("wishlist", wishlist.getWishlist());
+        user.addAttribute("username", wishlist.getUsername());
+        user.addAttribute("wishlist", wishlist.getWishlist());
 
         return "userpage.html";
     }
 
     @GetMapping("/logging-out")
-    public String logout(){
-        if(session==null){
+    public String logout() {
+        if (session == null) {
             return "redirect:/frontpage";
         }
         System.out.println("invalidating");
@@ -58,13 +58,13 @@ public class UIController {
         return "redirect:/frontpage";
     }
 
-    @PostMapping(value="addNewWish")
-    public String addNewWish(@RequestParam("wishName") String wishName, @RequestParam("price") int price, @RequestParam("description")String desc){
-            wishlist.addWish(wishName,price,desc);
+    @PostMapping(value = "addNewWish")
+    public String addNewWish(@RequestParam("wishName") String wishName, @RequestParam("price") int price, @RequestParam("description") String desc) {
+        wishlist.addWish(wishName, price, desc);
         return "redirect:/userpage";
     }
 
-    @PostMapping(value="upload-user")
+    @PostMapping(value = "upload-user")
     public String uploadUser(@RequestParam("username") String username, @RequestParam("password") String password) {
         boolean userCreated = wishlist.createNewUser(username, password);
         if (userCreated == true) {
@@ -75,13 +75,38 @@ public class UIController {
 
     }
 
+    @PostMapping(value = "/share-wishlist")
+    public String shareWishlist(@RequestParam("username") String sharedUser) {
+        wishlist.shareWishlist(sharedUser);
+        return "redirect:/userpage";
+    }
 
-        @PostMapping(value="/delete-wish")
-        public String deleteWish(@RequestParam("wish-id") int wishID){
-        wishlist.removeWish(wishID);
-            System.out.println(wishID);
-            return "redirect:/userpage";
+    @GetMapping(value = "/shared-wishlists")
+    public String renderSharedWishlists(Model user, HttpServletRequest request) {
+        if (session.isNew()) {
+            return "redirect:/login";
         }
+        user.addAttribute("username", wishlist.getUsername());
+        user.addAttribute("wishlists", wishlist.getSharedwishlists());
+
+        return "sharedWishlists.html";
+    }
+
+    @PostMapping(value = "/delete-wish")
+    public String deleteWish(@RequestParam("wish-id") int wishID) {
+        wishlist.removeWish(wishID);
+        System.out.println(wishID);
+        return "redirect:/userpage";
+    }
+
+    @GetMapping(value = "/selected-wishlist")
+    public String getSharedWishlist(@RequestParam("selected-wishlist") String username,Model wish) {
+
+        wish.addAttribute("username",username);
+        wish.addAttribute("wishlist", wishlist.getSharedWishlist(username));
+        System.out.println(username);
+        return "sharedWishlist.html";
+    }
 
 
 }

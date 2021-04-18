@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/head.html(currentPage='Wishlist of a friend')"></head>
+<body>
+<header th:replace="fragments/header.html(h1text='Wishlist of a friend')"></header>
+
+
+<section class="wishlist">
+    <ul th:each="wish : ${wishlist}" class="wish">
+        <li data-icon="">
+            <h2 th:text="|🎁 ${wish.getName()} 🎁|"></h2>
+            <div></div>
+            <p th:text="|Price: ${wish.getPrice()}|"></p>
+            <div></div>
+            <p th:text="${wish.getDescription()}"></p>
+        </li>
+    </ul>
+</section>
+</body>
+</html>

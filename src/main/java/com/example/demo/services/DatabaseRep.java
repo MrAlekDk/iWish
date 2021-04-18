@@ -2,6 +2,7 @@ package com.example.demo.services;
 
 import com.example.demo.models.User;
 import com.example.demo.models.Wish;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -9,6 +10,7 @@ public class DatabaseRep {
 
     public DatabaseRep() {
     }
+
     public ArrayList<Wish> getWishlist(int wishlistID) {
         ArrayList<Wish> wishlist = new ArrayList<Wish>();
 
@@ -81,15 +83,15 @@ public class DatabaseRep {
             PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM Wishlist");
             ResultSet st = pstmt.executeQuery();
 
-            while(st.next()){
-                if(st.getInt("ID") == wishID){
+            while (st.next()) {
+                if (st.getInt("ID") == wishID) {
                     PreparedStatement pstmt1 = conn.prepareStatement("UPDATE Wishlist SET Product_name = ?, Price = ?, Narrative = ? WHERE ID =" + wishID);
                     pstmt1.setString(1, newProductName);
                     pstmt1.setInt(2, newPrice);
                     pstmt1.setString(3, newNarrative);
                     pstmt1.executeUpdate();
 
-            }
+                }
 
             }
 
@@ -145,4 +147,73 @@ public class DatabaseRep {
         test.updateWish(4, "Lækkerier", 256, "Det her er super");
 
     }
+
+    public void shareWishlist(int currentUserWishlistID, String sharedUser) {
+
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:mysql://3.139.62.205:3306/iWish", "iWish", "1234");
+
+            PreparedStatement stmt2 = conn.prepareStatement("Insert into Shared_wishlists (Username,wishlist_ID) VALUES (?,?)");
+            stmt2.setString(1, sharedUser);
+            stmt2.setInt(2, currentUserWishlistID);
+            stmt2.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Something went wrong");
+            System.out.println(e.getMessage());
+        }
+
+    }
+
+    public ArrayList<String> getSharedWishlists(String username) {
+
+        ArrayList<String> names = new ArrayList<String>();
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:mysql://3.139.62.205:3306/iWish", "iWish", "1234");
+            PreparedStatement stmt = conn.prepareStatement("SELECT Shared_wishlists.Username,Member.NAME " +
+                    "from Member " +
+                    "INNER JOIN Shared_wishlists on Member.Wishlist_ID=Shared_wishlists.wishlist_ID");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                if (rs.getString(1).equals(username)) {
+                    names.add(rs.getString(2));
+                }
+            }
+            return names;
+
+        } catch (SQLException e) {
+            System.out.println("Something went wrong");
+            System.out.println(e.getMessage());
+        }
+
+        return names;
+    }
+
+
+    public ArrayList<Wish> getSharedWishlist(String username) {
+        ArrayList<Wish> wishlist = new ArrayList<Wish>();
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:mysql://3.139.62.205:3306/iWish", "iWish", "1234");
+            PreparedStatement stmt = conn.prepareStatement("SELECT Wishlist.*, Member.Name\n" +
+                    "from Wishlist \n" +
+                    "Inner JOIN Member on Wishlist.Wishlist_ID=Member.Wishlist_ID;");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                if (rs.getString(7).equals(username)) {
+                    Wish tmp = new Wish(
+                            rs.getInt("ID"),
+                            rs.getString("Product_name"),
+                            rs.getInt("Price"),
+                            rs.getString("Narrative")
+                    );
+                    wishlist.add(tmp);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Something went wrong");
+            System.out.println(e.getMessage());
+        }
+        return wishlist;
+    }
+
+
 }

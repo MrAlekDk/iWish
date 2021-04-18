@@ -61,4 +61,19 @@ public class Wishlist {
     public boolean createNewUser(String username,String password){
         return dbRep.createUser(username,password);
     }
+
+    public void shareWishlist(String sharedUser) {
+        dbRep.shareWishlist(this.user.getWishlistID(), sharedUser);
+
+    }
+
+    public ArrayList<String> getSharedwishlists(){
+
+        return dbRep.getSharedWishlists(this.user.getName());
+    }
+
+    public ArrayList<Wish> getSharedWishlist(String username) {
+
+        return dbRep.getSharedWishlist(username);
+    }
 }

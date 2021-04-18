@@ -5,6 +5,15 @@
 <header th:replace="fragments/header.html(h1text=|Welcome ${username}|)"></header>
 <footer th:replace="fragments/footer.html"></footer>
 
+<section class="share-wishlist">
+    <h3>Share your wishlist with user:</h3>
+    <form action="/share-wishlist" method="post" class="submitField">
+        <label for="username">Enter username who my wishlist will be shared with:</label><br>
+        <input type="text" id="username" name="username" placeholder="Username123"><br>
+        <button>Share my wishlist!</button>
+    </form>
+</section>
+
 <section class="wishlist">
     <ul th:each="wish : ${wishlist}" class="wish">
         <li data-icon="">
