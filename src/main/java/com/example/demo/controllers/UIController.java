@@ -63,7 +63,7 @@ public class UIController {
 
     @PostMapping(value = "addNewWish")
     public String addNewWish(@RequestParam("wishName") String wishName, @RequestParam("price") int price, @RequestParam("description") String desc) {
-        wishlist.addWish(wishName, price, desc,(Integer)session.getAttribute("ID"));
+        wishlist.addWish((String)session.getAttribute("username"),wishName, price, desc,(Integer)session.getAttribute("ID"));
         return "redirect:/userpage";
     }
 

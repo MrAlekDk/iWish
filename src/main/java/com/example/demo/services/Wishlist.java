@@ -25,9 +25,9 @@ public class Wishlist {
         }
     }
 
-    public void addWish(String name, int price, String description,int ID) {
-
+    public void addWish(String username, String name, int price, String description,int ID) {
         dbRep.createWish(name, price, description, ID);
+        wishlists.put(username,dbRep.getWishlist(ID));
     }
 
     public void removeWish(int x,int ID) {
