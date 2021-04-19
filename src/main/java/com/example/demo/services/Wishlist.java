@@ -11,7 +11,6 @@ public class Wishlist {
 
     public Wishlist() {
         dbRep = new DatabaseRep();
-
     }
 
     public ArrayList<Wish> getWishlist() {
