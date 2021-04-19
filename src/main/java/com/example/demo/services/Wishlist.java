@@ -2,31 +2,38 @@ package com.example.demo.services;
 
 import com.example.demo.models.User;
 import com.example.demo.models.Wish;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Wishlist {
-    private ArrayList<Wish> wishlist;
     private DatabaseRep dbRep;
-    private User user;
+    private HashMap<String, ArrayList<Wish>> wishlists;
 
     public Wishlist() {
+        wishlists = new HashMap<>();
         dbRep = new DatabaseRep();
     }
 
-    public ArrayList<Wish> getWishlist() {
-        this.wishlist = dbRep.getWishlist(user.getWishlistID());
-        return this.wishlist;
+    public ArrayList<Wish> getWishlist(String username,int ID) {
+        if (wishlists.containsKey(username)) {
+            return wishlists.get(username);
+        } else {
+            ArrayList<Wish> newWishlist = dbRep.getWishlist(ID);
+            wishlists.put(username, dbRep.getWishlist(ID));
+            return wishlists.get(username);
+        }
     }
 
-    public void addWish(String name, int price, String description) {
+    public void addWish(String name, int price, String description,int ID) {
 
-        dbRep.createWish(name,price,description,user.getWishlistID());
+        dbRep.createWish(name, price, description, ID);
     }
 
-    public void removeWish(int x) {
-       this.dbRep.deleteWish(x,this.user.getWishlistID());
+    public void removeWish(int x,int ID) {
+        this.dbRep.deleteWish(x, ID);
     }
-
+/*
     public void editWish(int x, String name, int price, String description) {
         for (int i = 0; i < wishlist.size(); i++) {
             if (wishlist.get(i).equals(x)) {
@@ -44,34 +51,26 @@ public class Wishlist {
             }
         }
     }
-
-    public String getUsername() {
-        return user.getName();
-    }
-
-    public boolean checkInformation(String username, String password) {
-            this.user = dbRep.checkUser(username, password);
-            if(user!=null){
-                return true;
-            }
-            return false;
-    }
-
-    public boolean createNewUser(String username,String password){
-        return dbRep.createUser(username,password);
-    }
-
-    public void shareWishlist(String sharedUser) {
-        dbRep.shareWishlist(this.user.getWishlistID(), sharedUser);
+*/
+    public User checkInformation(String username, String password) {
+        return dbRep.checkUser(username, password);
 
     }
 
-    public ArrayList<String> getSharedwishlists(){
-        return dbRep.getSharedWishlists(this.user.getName());
+    public boolean createNewUser(String username, String password) {
+        return dbRep.createUser(username, password);
+    }
+
+    public void shareWishlist(int ID,String sharedUser) {
+        dbRep.shareWishlist(ID,sharedUser);
+
+    }
+
+    public ArrayList<String> getSharedwishlists(String username) {
+        return dbRep.getSharedWishlists(username);
     }
 
     public ArrayList<Wish> getSharedWishlist(String username) {
-
         return dbRep.getSharedWishlist(username);
     }
 }

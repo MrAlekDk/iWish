@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import com.example.demo.models.User;
 import com.example.demo.services.Wishlist;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,10 +28,12 @@ public class UIController {
 
     @PostMapping(value = "/check-login")
     public String checkLogin(@RequestParam("username") String username, @RequestParam("password") String password, HttpServletRequest request) {
-
-        if (wishlist.checkInformation(username, password)) {
+        User tmpUser = wishlist.checkInformation(username, password);
+        System.out.println(tmpUser.toString());
+        if (tmpUser!=null) {
             session = request.getSession();
-            session.setAttribute("username", username);
+            session.setAttribute("username", tmpUser.getName());
+            session.setAttribute("ID", tmpUser.getWishlistID());
             return "redirect:/userpage";
         } else {
             return "redirect:/login";
@@ -42,8 +45,8 @@ public class UIController {
         if (session.isNew()) {
             return "redirect:/login";
         }
-        user.addAttribute("username", wishlist.getUsername());
-        user.addAttribute("wishlist", wishlist.getWishlist());
+        user.addAttribute("username", session.getAttribute("username"));
+        user.addAttribute("wishlist", wishlist.getWishlist((String) session.getAttribute("username"),(Integer)session.getAttribute("ID")));
 
         return "userpage.html";
     }
@@ -60,7 +63,7 @@ public class UIController {
 
     @PostMapping(value = "addNewWish")
     public String addNewWish(@RequestParam("wishName") String wishName, @RequestParam("price") int price, @RequestParam("description") String desc) {
-        wishlist.addWish(wishName, price, desc);
+        wishlist.addWish(wishName, price, desc,(Integer)session.getAttribute("ID"));
         return "redirect:/userpage";
     }
 
@@ -84,7 +87,7 @@ public class UIController {
 
     @PostMapping(value = "/share-wishlist")
     public String shareWishlist(@RequestParam("username") String sharedUser) {
-        wishlist.shareWishlist(sharedUser);
+        wishlist.shareWishlist((Integer) session.getAttribute("ID"),sharedUser);
         return "redirect:/userpage";
     }
 
@@ -93,15 +96,15 @@ public class UIController {
         if (session.isNew()) {
             return "redirect:/login";
         }
-        user.addAttribute("username", wishlist.getUsername());
-        user.addAttribute("wishlists", wishlist.getSharedwishlists());
+        user.addAttribute("username", session.getAttribute("username"));
+        user.addAttribute("wishlists", wishlist.getSharedwishlists((String)session.getAttribute("username")));
 
         return "sharedWishlists.html";
     }
 
     @PostMapping(value = "/delete-wish")
     public String deleteWish(@RequestParam("wish-id") int wishID) {
-        wishlist.removeWish(wishID);
+        wishlist.removeWish(wishID,(Integer)session.getAttribute("ID"));
         System.out.println(wishID);
         return "redirect:/userpage";
     }

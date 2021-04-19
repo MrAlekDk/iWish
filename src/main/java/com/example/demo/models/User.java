@@ -24,5 +24,10 @@ public class User {
     public int getWishlistID() {
         return this.wishListID;
     }
+
+    @Override
+    public String toString(){
+        return this.name + this.wishListID;
+    }
 }
 

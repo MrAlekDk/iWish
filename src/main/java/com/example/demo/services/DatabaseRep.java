@@ -51,7 +51,7 @@ public class DatabaseRep {
         return wishlist;
     }
 
-    public User checkUser(String username, String password) {
+    public User checkUser(String username, String password1) {
 
         try {
             Connection conn = DriverManager.getConnection(url,user, this.password);
@@ -60,7 +60,7 @@ public class DatabaseRep {
 
             while (rs.next()) {
                 if (rs.getString(2).equals(username)) {
-                    if (rs.getString(3).equals(password)) {
+                    if (rs.getString(3).equals(password1)) {
                         User user = new User(
                                 rs.getString(2),
                                 rs.getInt(1));
@@ -132,7 +132,7 @@ public class DatabaseRep {
         }
     }
 
-    public boolean createUser(String username, String password) {
+    public boolean createUser(String username, String password1) {
         try {
             Connection conn = DriverManager.getConnection(url ,user, this.password);
             PreparedStatement stmt = conn.prepareStatement("Select Name From Member");
@@ -143,7 +143,7 @@ public class DatabaseRep {
                 } else if (rs1.getString(1) != username) {
                     PreparedStatement stmt3 = conn.prepareStatement("INSERT INTO Member (Name,Password) VALUES (?,?)");
                     stmt3.setString(1, username);
-                    stmt3.setString(2, password);
+                    stmt3.setString(2, password1);
                     stmt3.executeUpdate();
                     return true;
                 }
@@ -171,6 +171,7 @@ public class DatabaseRep {
             PreparedStatement stmt2 = conn.prepareStatement("Insert into Shared_wishlists (Username,wishlist_ID) VALUES (?,?)");
             stmt2.setString(1, sharedUser);
             stmt2.setInt(2, currentUserWishlistID);
+            System.out.println("Shared the wishlist");
             stmt2.executeUpdate();
         } catch (SQLException e) {
             System.out.println("Something went wrong");
