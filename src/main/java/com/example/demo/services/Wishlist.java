@@ -20,7 +20,7 @@ public class Wishlist {
             return wishlists.get(username);
         } else {
             ArrayList<Wish> newWishlist = dbRep.getWishlist(ID);
-            wishlists.put(username, dbRep.getWishlist(ID));
+            wishlists.put(username, newWishlist);
             return wishlists.get(username);
         }
     }
