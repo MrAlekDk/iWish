@@ -67,7 +67,6 @@ public class Wishlist {
     }
 
     public ArrayList<String> getSharedwishlists(){
-
         return dbRep.getSharedWishlists(this.user.getName());
     }
 

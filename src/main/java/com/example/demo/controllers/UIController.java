@@ -53,8 +53,8 @@ public class UIController {
         if (session == null) {
             return "redirect:/frontpage";
         }
-        System.out.println("invalidating");
         session.invalidate();
+        session=null;
         return "redirect:/frontpage";
     }
 
@@ -62,6 +62,14 @@ public class UIController {
     public String addNewWish(@RequestParam("wishName") String wishName, @RequestParam("price") int price, @RequestParam("description") String desc) {
         wishlist.addWish(wishName, price, desc);
         return "redirect:/userpage";
+    }
+
+    @GetMapping(value="/create-user")
+    public String createNewUser(){
+        if (session!= null) {
+            return "redirect:/frontpage";
+        }
+        return "createUser.html";
     }
 
     @PostMapping(value = "upload-user")
@@ -72,7 +80,6 @@ public class UIController {
         } else {
             return "redirect:/create-user";
         }
-
     }
 
     @PostMapping(value = "/share-wishlist")
@@ -82,7 +89,7 @@ public class UIController {
     }
 
     @GetMapping(value = "/shared-wishlists")
-    public String renderSharedWishlists(Model user, HttpServletRequest request) {
+    public String renderSharedWishlists(Model user) {
         if (session.isNew()) {
             return "redirect:/login";
         }

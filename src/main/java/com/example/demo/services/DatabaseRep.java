@@ -149,7 +149,6 @@ public class DatabaseRep {
     }
 
     public void shareWishlist(int currentUserWishlistID, String sharedUser) {
-
         try {
             Connection conn = DriverManager.getConnection("jdbc:mysql://3.139.62.205:3306/iWish", "iWish", "1234");
 
@@ -169,6 +168,8 @@ public class DatabaseRep {
         ArrayList<String> names = new ArrayList<String>();
         try {
             Connection conn = DriverManager.getConnection("jdbc:mysql://3.139.62.205:3306/iWish", "iWish", "1234");
+
+
             PreparedStatement stmt = conn.prepareStatement("SELECT Shared_wishlists.Username,Member.NAME " +
                     "from Member " +
                     "INNER JOIN Shared_wishlists on Member.Wishlist_ID=Shared_wishlists.wishlist_ID");
@@ -187,7 +188,6 @@ public class DatabaseRep {
 
         return names;
     }
-
 
     public ArrayList<Wish> getSharedWishlist(String username) {
         ArrayList<Wish> wishlist = new ArrayList<Wish>();
