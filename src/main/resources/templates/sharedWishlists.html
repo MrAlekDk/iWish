@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:replace="fragments/head.html(currentPage='Shared wishlists')"></head>
 <body>
-<header th:replace="fragments/header.html(h1text='Wishlists shared with you')"></header>
+<header th:replace="fragments/logged-in-header.html(h1text='Wishlists shared with you')"></header>
 
 <section class="shared-wishlist">
     <ul th:each="list : ${wishlists}" class="wish">

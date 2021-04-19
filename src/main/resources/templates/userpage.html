@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:replace="fragments/head.html(currentPage='Userpage')"></head>
 <body>
-<header th:replace="fragments/header.html(h1text=|Welcome ${username}|)"></header>
+<header th:replace="fragments/logged-in-header.html(h1text=|Welcome ${username}|)"></header>
 <footer th:replace="fragments/footer.html"></footer>
 
 <section class="share-wishlist">
