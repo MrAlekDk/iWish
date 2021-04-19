@@ -3,19 +3,35 @@ package com.example.demo.services;
 import com.example.demo.models.User;
 import com.example.demo.models.Wish;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Properties;
 
 public class DatabaseRep {
 
+    private String url;
+    private String user;
+    private String password;
+
     public DatabaseRep() {
+        Properties prop = new Properties();
+        try{
+            prop.load(new FileInputStream("src/main/resources/application.properties"));
+            user = prop.getProperty("user");
+            password = prop.getProperty("password");
+            url = prop.getProperty("url");
+        } catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     public ArrayList<Wish> getWishlist(int wishlistID) {
         ArrayList<Wish> wishlist = new ArrayList<Wish>();
 
         try {
-            Connection conn = DriverManager.getConnection("jdbc:mysql://3.139.62.205:3306/iWish", "iWish", "1234");
+            Connection conn = DriverManager.getConnection(url, user,password);
             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Wishlist WHERE Wishlist_ID=?");
             stmt.setInt(1, wishlistID);
             ResultSet rs = stmt.executeQuery();
@@ -38,7 +54,7 @@ public class DatabaseRep {
     public User checkUser(String username, String password) {
 
         try {
-            Connection conn = DriverManager.getConnection("jdbc:mysql://3.139.62.205:3306/iWish", "iWish", "1234");
+            Connection conn = DriverManager.getConnection(url,user, password);
             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Member");
             ResultSet rs = stmt.executeQuery();
 
@@ -62,7 +78,7 @@ public class DatabaseRep {
 
     public void createWish(String productName, int price, String description, int wishlist_ID) {
         try {
-            Connection conn = DriverManager.getConnection("jdbc:mysql://3.139.62.205:3306/iWish", "iWish", "1234");
+            Connection conn = DriverManager.getConnection(url,user,password);
             PreparedStatement pstmt = conn.prepareStatement("INSERT INTO Wishlist (Wishlist_ID,Product_name,Price,Narrative,Reserved) VALUES (?,?,?,?,?)");
 
             pstmt.setInt(1, wishlist_ID);
@@ -79,7 +95,7 @@ public class DatabaseRep {
 
     public void updateWish(int wishID, String newProductName, int newPrice, String newNarrative) {
         try {
-            Connection conn = DriverManager.getConnection("jdbc:mysql://3.139.62.205:3306/iWish", "iWish", "1234");
+            Connection conn = DriverManager.getConnection(url,user,password);
             PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM Wishlist");
             ResultSet st = pstmt.executeQuery();
 
@@ -103,7 +119,7 @@ public class DatabaseRep {
     public void deleteWish(int productID, int wishlist_ID) {
 
         try {
-            Connection conn = DriverManager.getConnection("jdbc:mysql://3.139.62.205:3306/iWish", "iWish", "1234");
+            Connection conn = DriverManager.getConnection(url , user, password);
             PreparedStatement pstm = conn.prepareStatement("DELETE FROM Wishlist WHERE ID = ? AND Wishlist_ID = ?");
 
             pstm.setInt(1, productID);
@@ -118,7 +134,7 @@ public class DatabaseRep {
 
     public boolean createUser(String username, String password) {
         try {
-            Connection conn = DriverManager.getConnection("jdbc:mysql://3.139.62.205:3306/iWish", "iWish", "1234");
+            Connection conn = DriverManager.getConnection(url ,user, password);
             PreparedStatement stmt = conn.prepareStatement("Select Name From Member");
             ResultSet rs1 = stmt.executeQuery();
             while (rs1.next()) {
@@ -150,7 +166,7 @@ public class DatabaseRep {
 
     public void shareWishlist(int currentUserWishlistID, String sharedUser) {
         try {
-            Connection conn = DriverManager.getConnection("jdbc:mysql://3.139.62.205:3306/iWish", "iWish", "1234");
+            Connection conn = DriverManager.getConnection(url ,user,password);
 
             PreparedStatement stmt2 = conn.prepareStatement("Insert into Shared_wishlists (Username,wishlist_ID) VALUES (?,?)");
             stmt2.setString(1, sharedUser);
@@ -167,7 +183,7 @@ public class DatabaseRep {
 
         ArrayList<String> names = new ArrayList<String>();
         try {
-            Connection conn = DriverManager.getConnection("jdbc:mysql://3.139.62.205:3306/iWish", "iWish", "1234");
+            Connection conn = DriverManager.getConnection(url , user, password);
 
 
             PreparedStatement stmt = conn.prepareStatement("SELECT Shared_wishlists.Username,Member.NAME " +
@@ -192,7 +208,7 @@ public class DatabaseRep {
     public ArrayList<Wish> getSharedWishlist(String username) {
         ArrayList<Wish> wishlist = new ArrayList<Wish>();
         try {
-            Connection conn = DriverManager.getConnection("jdbc:mysql://3.139.62.205:3306/iWish", "iWish", "1234");
+            Connection conn = DriverManager.getConnection(url, user, password);
             PreparedStatement stmt = conn.prepareStatement("SELECT Wishlist.*, Member.Name\n" +
                     "from Wishlist \n" +
                     "Inner JOIN Member on Wishlist.Wishlist_ID=Member.Wishlist_ID;");
