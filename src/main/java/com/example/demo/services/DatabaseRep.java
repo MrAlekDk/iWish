@@ -54,7 +54,7 @@ public class DatabaseRep {
     public User checkUser(String username, String password) {
 
         try {
-            Connection conn = DriverManager.getConnection(url,user, password);
+            Connection conn = DriverManager.getConnection(url,user, this.password);
             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Member");
             ResultSet rs = stmt.executeQuery();
 
@@ -134,7 +134,7 @@ public class DatabaseRep {
 
     public boolean createUser(String username, String password) {
         try {
-            Connection conn = DriverManager.getConnection(url ,user, password);
+            Connection conn = DriverManager.getConnection(url ,user, this.password);
             PreparedStatement stmt = conn.prepareStatement("Select Name From Member");
             ResultSet rs1 = stmt.executeQuery();
             while (rs1.next()) {
