@@ -26,11 +26,7 @@ public class IWishController {
         return "frontpage.html";
     }
 
-    @GetMapping(value="/create-user")
-    public String createNewUser(){
 
-        return "createUser.html";
-    }
 
 
 }
