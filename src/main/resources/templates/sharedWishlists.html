@@ -3,6 +3,7 @@
 <head th:replace="fragments/head.html(currentPage='Shared wishlists')"></head>
 <body>
 <header th:replace="fragments/logged-in-header.html(h1text='Wishlists shared with you')"></header>
+<footer th:replace="fragments/footer.html"></footer>
 
 <section class="shared-wishlist">
     <ul th:each="list : ${wishlists}" class="wish">

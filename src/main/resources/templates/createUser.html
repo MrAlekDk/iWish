@@ -3,6 +3,7 @@
 <head th:replace = "fragments/head.html(currentPage = 'Create User', stylesheet='styles/createUser.css')"></head>
 <body>
 <header th:replace = "fragments/header.html(h1text = 'Create new user')"></header>
+<footer th:replace="fragments/footer.html"></footer>
 
 <section class="create-a-new-user">
     <form action="/upload-user" method="post" class="submitField">
