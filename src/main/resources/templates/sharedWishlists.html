@@ -8,7 +8,8 @@
 <section class="shared-wishlist">
     <ul th:each="list : ${wishlists}" class="wish">
         <li data-icon="">
-            <p th:text="${list}"></p>
+            <h2 th:text="${list}" class="shared-wishlist"></h2>
+            <img src="images/wl.png" alt="wishList" class="image">
         </li>
         <form th:action="@{/selected-wishlist}" method="Get">
             <input type="hidden" name="selected-wishlist" th:value="${list}" />
