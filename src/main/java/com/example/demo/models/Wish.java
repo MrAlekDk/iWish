@@ -8,12 +8,12 @@ public class Wish {
     private String description;
     private boolean reserved;
 
-    public Wish(int wishID, String name, int price, String description){
+    public Wish(int wishID, String name, int price, String description, boolean reserved){
         this.wishID=wishID;
         this.name = name;
         this.price = price;
         this.description = description;
-        this.reserved = false;
+        this.reserved = reserved;
     }
     public Wish(){};
 

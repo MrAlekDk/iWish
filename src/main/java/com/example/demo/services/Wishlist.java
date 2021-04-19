@@ -33,25 +33,11 @@ public class Wishlist {
     public void removeWish(int x,int ID) {
         this.dbRep.deleteWish(x, ID);
     }
-/*
-    public void editWish(int x, String name, int price, String description) {
-        for (int i = 0; i < wishlist.size(); i++) {
-            if (wishlist.get(i).equals(x)) {
-                wishlist.get(i).setName(name);
-                wishlist.get(i).setPrice(price);
-                wishlist.get(i).setDescription(description);
-            }
-        }
+
+    public void reserveWish(int wishID) {
+        dbRep.reserveWish(wishID);
     }
 
-    public void reservWish(int x) {
-        for (int i = 0; i < wishlist.size(); i++) {
-            if (wishlist.get(i).equals(x)) {
-                wishlist.get(i).setReserved(true);
-            }
-        }
-    }
-*/
     public User checkInformation(String username, String password) {
         return dbRep.checkUser(username, password);
 

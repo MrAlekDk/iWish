@@ -14,6 +14,11 @@
             <div></div>
             <p th:text="${wish.getDescription()}"></p>
         </li>
+        <form class="button" th:action="@{/reserve-wish}" method="post">
+            <input type="hidden" name="wish-id" th:value="${wish.getWishID()}" />
+            <input th:if="${!wish.getReserved()}" type="submit" value="Reserve" class="btn btn-danger" />
+            <input th:if="${wish.getReserved()}" type="submit" value="Damn, too late" class="btn btn-danger" />
+        </form>
     </ul>
 </section>
 </body>

@@ -105,7 +105,6 @@ public class UIController {
     @PostMapping(value = "/delete-wish")
     public String deleteWish(@RequestParam("wish-id") int wishID) {
         wishlist.removeWish(wishID,(Integer)session.getAttribute("ID"));
-        System.out.println(wishID);
         return "redirect:/userpage";
     }
 
@@ -114,9 +113,12 @@ public class UIController {
 
         wish.addAttribute("username",username);
         wish.addAttribute("wishlist", wishlist.getSharedWishlist(username));
-        System.out.println(username);
         return "sharedWishlist.html";
     }
 
-
+    @PostMapping(value = "/reserve-wish")
+    public String reserveWish(@RequestParam("wish-id") int wishID) {
+        wishlist.reserveWish(wishID);
+        return "redirect:/shared-wishlists";
+    }
 }

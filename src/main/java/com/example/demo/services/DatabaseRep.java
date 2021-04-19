@@ -40,7 +40,8 @@ public class DatabaseRep {
                         rs.getInt("ID"),
                         rs.getString("Product_name"),
                         rs.getInt("Price"),
-                        rs.getString("Narrative")
+                        rs.getString("Narrative"),
+                        rs.getBoolean("Reserved")
                 );
                 wishlist.add(tmp);
             }
@@ -116,6 +117,28 @@ public class DatabaseRep {
         }
     }
 
+    public void reserveWish(int wishID){
+
+        try{
+            Connection conn = DriverManager.getConnection(url,user,password);
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Wishlist");
+            ResultSet st = stmt.executeQuery();
+
+            while (st.next()) {
+                if (st.getInt("Reserved") == 0) {
+                    PreparedStatement stmt1 = conn.prepareStatement("UPDATE Wishlist SET Reserved = 1 WHERE ID =" + wishID);
+                    stmt1.executeUpdate();
+                } else {
+                    PreparedStatement stmt2 = conn.prepareStatement("UPDATE Wishlist SET Reserved = 0 WHERE ID =" + wishID);
+                    stmt2.executeUpdate();
+                }
+            }
+
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
     public void deleteWish(int productID, int wishlist_ID) {
 
         try {
@@ -154,14 +177,6 @@ public class DatabaseRep {
             System.out.println(e.getMessage());
         }
         return false;
-    }
-
-    public static void main(String[] args) {
-
-        DatabaseRep test = new DatabaseRep();
-
-        test.updateWish(4, "Lækkerier", 256, "Det her er super");
-
     }
 
     public void shareWishlist(int currentUserWishlistID, String sharedUser) {
@@ -220,7 +235,8 @@ public class DatabaseRep {
                             rs.getInt("ID"),
                             rs.getString("Product_name"),
                             rs.getInt("Price"),
-                            rs.getString("Narrative")
+                            rs.getString("Narrative"),
+                            rs.getBoolean("Reserved")
                     );
                     wishlist.add(tmp);
                 }
@@ -231,6 +247,15 @@ public class DatabaseRep {
         }
         return wishlist;
     }
+
+    public static void main(String[] args) {
+
+        DatabaseRep test = new DatabaseRep();
+
+        test.reserveWish(18);
+
+    }
+
 
 
 }
