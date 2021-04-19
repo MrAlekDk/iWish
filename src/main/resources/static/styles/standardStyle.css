@@ -122,3 +122,10 @@ ul{
     margin-left: auto;
     margin-right: auto;
 }
+
+.shared-wishlist{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    list-style-type: none;
+}
