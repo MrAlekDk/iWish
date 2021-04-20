@@ -3,10 +3,16 @@ package com.example.demo.models;
 public class User {
     private String name;
     private int wishListID;
+    private String password;
 
     public User(String name, int wishListID) {
         this.name = name;
         this.wishListID = wishListID;
+    }
+
+    public User(String name, String password) {
+        this.name = name;
+        this.password = password;
     }
 
     public User(String name) {
