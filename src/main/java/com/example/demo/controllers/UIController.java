@@ -29,7 +29,6 @@ public class UIController {
     @PostMapping(value = "/check-login")
     public String checkLogin(@RequestParam("username") String username, @RequestParam("password") String password, HttpServletRequest request) {
         User tmpUser = wishlist.checkInformation(username, password);
-        System.out.println(tmpUser.toString());
         if (tmpUser!=null) {
             session = request.getSession();
             session.setAttribute("username", tmpUser.getName());
@@ -69,7 +68,7 @@ public class UIController {
 
     @GetMapping(value="/create-user")
     public String createNewUser(){
-        if (session!= null) {
+        if (session == null) {
             return "redirect:/frontpage";
         }
         return "createUser.html";
