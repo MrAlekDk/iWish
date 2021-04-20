@@ -129,3 +129,12 @@ ul{
     flex-wrap: wrap;
     list-style-type: none;
 }
+
+.button {
+    font: 15px "segoe UI", sans-serif;
+    display: inline-block;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 3px;
+    background-color: #529aac;
+}

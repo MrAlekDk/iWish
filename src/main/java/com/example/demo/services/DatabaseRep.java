@@ -60,8 +60,8 @@ public class DatabaseRep {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                if (rs.getString(2).equals(username)) {
-                    if (rs.getString(3).equals(password1)) {
+                if (rs.getString("Name").equals(username)) {
+                    if (rs.getString("Password").equals(password1)) {
                         User user = new User(
                                 rs.getString(2),
                                 rs.getInt(1));
@@ -125,12 +125,9 @@ public class DatabaseRep {
             ResultSet st = stmt.executeQuery();
 
             while (st.next()) {
-                if (st.getInt("Reserved") == 0) {
+                if (st.getBoolean("Reserved") == false) {
                     PreparedStatement stmt1 = conn.prepareStatement("UPDATE Wishlist SET Reserved = 1 WHERE ID =" + wishID);
                     stmt1.executeUpdate();
-                } else {
-                    PreparedStatement stmt2 = conn.prepareStatement("UPDATE Wishlist SET Reserved = 0 WHERE ID =" + wishID);
-                    stmt2.executeUpdate();
                 }
             }
 
