@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 
 @Controller
-public class UIController {
+public class IwishController {
     private Wishlist wishlist = new Wishlist();
     private HttpSession session;
 
