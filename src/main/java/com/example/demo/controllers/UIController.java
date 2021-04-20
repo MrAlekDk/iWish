@@ -17,6 +17,13 @@ public class UIController {
     private Wishlist wishlist = new Wishlist();
     private HttpSession session;
 
+
+    @GetMapping("/frontpage")
+    public String frontpage() {
+        return "frontpage.html";
+    }
+
+
     @GetMapping(value = "/login")
     public String renderLoginPage(HttpServletRequest request) {
         session = request.getSession();
@@ -60,6 +67,16 @@ public class UIController {
         return "redirect:/frontpage";
     }
 
+
+    @GetMapping(value = "/createWish")
+    public String renderWishCreatorPage(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        if(session.getAttribute("username") ==null){
+            return "redirect:/login";
+        }
+        return "wishcreator.html";
+    }
+
     @PostMapping(value = "addNewWish")
     public String addNewWish(@RequestParam("wishName") String wishName, @RequestParam("price") int price, @RequestParam("description") String desc) {
         wishlist.addWish((String)session.getAttribute("username"),wishName, price, desc,(Integer)session.getAttribute("ID"));
@@ -67,8 +84,9 @@ public class UIController {
     }
 
     @GetMapping(value="/create-user")
-    public String createNewUser(){
-        if (session == null) {
+    public String createNewUser(HttpServletRequest request){
+        session = request.getSession();
+        if (session.getAttribute("username")!=null) {
             return "redirect:/frontpage";
         }
         return "createUser.html";

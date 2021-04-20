@@ -11,20 +11,6 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class IWishController {
 
-    @GetMapping(value = "/createWish")
-    public String renderWishCreatorPage(HttpServletRequest request){
-        HttpSession session = request.getSession();
-        if(session.getAttribute("username") ==null){
-            return "redirect:/login";
-        }
-        return "wishcreator.html";
-    }
-
-
-    @GetMapping("/frontpage")
-    public String frontpage() {
-        return "frontpage.html";
-    }
 
 
 
