@@ -15,7 +15,6 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class IwishController {
     private Wishlist wishlist = new Wishlist();
-    private HttpSession session;
 
 
     @GetMapping("/frontpage")
@@ -26,7 +25,7 @@ public class IwishController {
 
     @GetMapping(value = "/login")
     public String renderLoginPage(HttpServletRequest request) {
-        session = request.getSession();
+        HttpSession session = request.getSession();
         if (!session.isNew() && session.getAttribute("username") != null) {
             return "redirect:/userpage";
         }
@@ -36,6 +35,7 @@ public class IwishController {
     @PostMapping(value = "/check-login")
     public String checkLogin(@RequestParam("username") String username, @RequestParam("password") String password, HttpServletRequest request) {
         User tmpUser = wishlist.checkInformation(username, password);
+        HttpSession session = request.getSession();
         if (tmpUser!=null) {
             session = request.getSession();
             session.setAttribute("username", tmpUser.getName());
@@ -48,6 +48,7 @@ public class IwishController {
 
     @GetMapping(value = "/userpage")
     public String renderUserpage(Model user, HttpServletRequest request) {
+        HttpSession session = request.getSession();
         if (session.isNew()) {
             return "redirect:/login";
         }
@@ -58,7 +59,8 @@ public class IwishController {
     }
 
     @GetMapping("/logging-out")
-    public String logout() {
+    public String logout(HttpServletRequest request) {
+        HttpSession session = request.getSession();
         if (session == null) {
             return "redirect:/frontpage";
         }
@@ -78,13 +80,15 @@ public class IwishController {
     }
 
     @PostMapping(value = "addNewWish")
-    public String addNewWish(@RequestParam("wishName") String wishName, @RequestParam("price") int price, @RequestParam("description") String desc) {
+    public String addNewWish(@RequestParam("wishName") String wishName, @RequestParam("price") int price, @RequestParam("description") String desc,HttpServletRequest request) {
+        HttpSession session = request.getSession();
         wishlist.addWish((String)session.getAttribute("username"),wishName, price, desc,(Integer)session.getAttribute("ID"));
         return "redirect:/userpage";
     }
 
     @GetMapping(value="/create-user")
     public String createNewUser(HttpServletRequest request){
+        HttpSession session = request.getSession();
         session = request.getSession();
         if (session.getAttribute("username")!=null) {
             return "redirect:/frontpage";
@@ -103,13 +107,15 @@ public class IwishController {
     }
 
     @PostMapping(value = "/share-wishlist")
-    public String shareWishlist(@RequestParam("username") String sharedUser) {
+    public String shareWishlist(@RequestParam("username") String sharedUser,HttpServletRequest request) {
+        HttpSession session = request.getSession();
         wishlist.shareWishlist((Integer) session.getAttribute("ID"),sharedUser);
         return "redirect:/userpage";
     }
 
     @GetMapping(value = "/shared-wishlists")
-    public String renderSharedWishlists(Model user) {
+    public String renderSharedWishlists(Model user,HttpServletRequest request) {
+        HttpSession session = request.getSession();
         if (session.isNew()) {
             return "redirect:/login";
         }
@@ -120,8 +126,9 @@ public class IwishController {
     }
 
     @PostMapping(value = "/delete-wish")
-    public String deleteWish(@RequestParam("wish-id") int wishID) {
-        wishlist.removeWish(wishID,(Integer)session.getAttribute("ID"));
+    public String deleteWish(@RequestParam("wish-id") int wishID,HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        wishlist.removeWish((String)session.getAttribute("username"),wishID,(Integer)session.getAttribute("ID"));
         return "redirect:/userpage";
     }
 

@@ -30,8 +30,9 @@ public class Wishlist {
         wishlists.put(username,dbRep.getWishlist(ID));
     }
 
-    public void removeWish(int x,int ID) {
+    public void removeWish(String username, int x,int ID) {
         this.dbRep.deleteWish(x, ID);
+        wishlists.put(username,dbRep.getWishlist(ID));
     }
 
     public void reserveWish(int wishID) {

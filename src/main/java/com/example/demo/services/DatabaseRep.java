@@ -11,9 +11,9 @@ import java.util.Properties;
 
 public class DatabaseRep {
 
-    private String url = "";
-    private String user = "";
-    private String password = "";
+    private String url =  "jdbc:mysql://13.58.239.214:3306/iWish";
+    private String user = "iWish";
+    private String password = "1234";
 
     public DatabaseRep() {
     }
